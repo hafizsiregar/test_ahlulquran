@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test_ahlulquran/widget/package_item.dart';
 
 class ItemPage extends StatefulWidget {
   const ItemPage({super.key});
@@ -9,15 +8,49 @@ class ItemPage extends StatefulWidget {
 }
 
 class _ItemPageState extends State<ItemPage> {
-  List<bool> cardStates = [false, false, false, false, false, false];
-  void changeStateColor(int index) {
-    setState(() {
-      cardStates[index] = !cardStates[index];
-    });
-  }
+  int _selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
+    Widget packageItem(String amount, String price, int index) {
+      return GestureDetector(
+        onTap: () {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          width: 175,
+          decoration: BoxDecoration(
+            color: _selectedIndex == index ? Colors.green[100]! : Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: Colors.grey,
+              width: 2,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                amount,
+                style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                price,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -43,53 +76,35 @@ class _ItemPageState extends State<ItemPage> {
               runSpacing: 17,
               spacing: 17,
               children: [
-                GestureDetector(
-                  onTap: () => changeStateColor(0),
-                  child: PackageItem(
-                    amount: '15.000',
-                    price: 'Rp.16.500',
-                    color: cardStates[0] ? Colors.green[100]! : Colors.white,
-                  ),
+                packageItem(
+                  '15.000',
+                  'Rp.16.5000',
+                  0,
                 ),
-                GestureDetector(
-                  onTap: () => changeStateColor(1),
-                  child: PackageItem(
-                    amount: '15.000',
-                    price: 'Rp.16.500',
-                    color: cardStates[1] ? Colors.green[100]! : Colors.white,
-                  ),
+                packageItem(
+                  '15.000',
+                  'Rp.16.5000',
+                  1,
                 ),
-                GestureDetector(
-                  onTap: () => changeStateColor(2),
-                  child: PackageItem(
-                    amount: '15.000',
-                    price: 'Rp.16.500',
-                    color: cardStates[2] ? Colors.green[100]! : Colors.white,
-                  ),
+                packageItem(
+                  '15.000',
+                  'Rp.16.5000',
+                  2,
                 ),
-                GestureDetector(
-                  onTap: () => changeStateColor(3),
-                  child: PackageItem(
-                    amount: '15.000',
-                    price: 'Rp.16.500',
-                    color: cardStates[3] ? Colors.green[100]! : Colors.white,
-                  ),
+                packageItem(
+                  '15.000',
+                  'Rp.16.5000',
+                  3,
                 ),
-                GestureDetector(
-                  onTap: () => changeStateColor(4),
-                  child: PackageItem(
-                    amount: '15.000',
-                    price: 'Rp.16.500',
-                    color: cardStates[4] ? Colors.green[100]! : Colors.white,
-                  ),
+                packageItem(
+                  '15.000',
+                  'Rp.16.5000',
+                  4,
                 ),
-                GestureDetector(
-                  onTap: () => changeStateColor(5),
-                  child: PackageItem(
-                    amount: '15.000',
-                    price: 'Rp.16.500',
-                    color: cardStates[5] ? Colors.green[100]! : Colors.white,
-                  ),
+                packageItem(
+                  '15.000',
+                  'Rp.16.5000',
+                  5,
                 ),
               ],
             ),
